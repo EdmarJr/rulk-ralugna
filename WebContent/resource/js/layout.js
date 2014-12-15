@@ -1,6 +1,6 @@
 const enderecoRest = 'http://localhost\\:8080/Rest-web/rest/';
 
-var app = angular.module('academia', ['ngRoute','ngResource']);
+var app = angular.module('academia', ['ngRoute','ngResource','restangular']);
 
 app.config(['$routeProvider',function($routeProvider) {
     $routeProvider.when('/cadastro/empresa', {
@@ -15,8 +15,8 @@ app.config(['$routeProvider',function($routeProvider) {
     })
 }]);
 
-app.factory('UnidadeService',function($resource) {
-	return $resource(enderecoRest + 'unidades/:unidadeId',{unidadeId: '@id'});
+app.factory('UnidadeService',function(Restangular) {
+
 });
 
 app.run(['$rootScope','$location',function($rootScope,$location) {
