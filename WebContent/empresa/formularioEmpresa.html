@@ -1,0 +1,15 @@
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<fieldset>
+<legend>Empresa - Formulário de Cadastro</legend>
+<form class="container-fluid" novalidate>
+	<label for="nome">Nome</label>
+	<input id="nome" type="text" ng-model="empresa.nome" placeholder="Digite o nome de sua empresa">
+	<label for="email">Email</label>
+	<input id="email" type="email" name="email" ng-model="empresa.email" placeholder="Digite o email da sua empresa">
+	<label for="responsavel">Responsável</label>
+	<input id="responsavel" type="text" name="responsavel" ng-model="empresa.responsavel" placeholder="Digite o nome do responsável pela a empresa.">
+	<label for="telefone">Telefone</label>
+	<input id="telefone" type="text" name="telefone" ng-model="empresa.telefone" placeholder="Digite telefone para contato.">
+	<button name="submit" ng-click="submeterFormulario()">Enviar</button>
+</form>
+</fieldset>

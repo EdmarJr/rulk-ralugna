@@ -1,0 +1,13 @@
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<fieldset>
+<legend>Cliente - Formulário de Cadastro</legend>
+<form class="container-fluid" novalidate>
+	<label for="nome">Nome</label>
+	<input id="nome" type="text" ng-model="cliente.nome" placeholder="Digite o nome de sua empresa">
+	<label for="email">Email</label>
+	<input id="email" type="email" name="email" ng-model="cliente.email" placeholder="Digite o email do cliente">
+	<label for="telefone">Telefone</label>
+	<input id="telefone" type="text" name="telefone" ng-model="empresa.telefone" placeholder="Digite telefone para contato.">
+	<button name="submit" ng-click="submeterFormulario()">Enviar</button>
+</form>
+</fieldset>
