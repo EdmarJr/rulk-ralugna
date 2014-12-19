@@ -1,19 +1,23 @@
 const enderecoRest = '/Rest-web/rest';
 var app = angular.module('academia', ['ngRoute','ngCookies','restangular']);
 
-app.run(function(Auth) {
-	Auth.setUser({role : 1});
-});
-
 app.factory('Auth',['$cookieStore',function($cookieStore) {
 	var _user = $cookieStore.get('user');
 	
 	var setUser = function(user) {
+		
+		if(user.roles && user.roles[0] == "ADMIN") {
+			user.role = 10;
+		}
 		if(!user.role || user.role < 0) {
 			user.role = 1;
 		}
 		_user = user;
 		$cookieStore.put('user',_user);
+	}
+	
+	if(!_user) {
+		setUser({role : 1});
 	}
 	
 	return {
@@ -22,7 +26,7 @@ app.factory('Auth',['$cookieStore',function($cookieStore) {
 		},
 		setUser: setUser,
 		isLoggedIn: function() {
-			return _user ? true : false;
+			return _user.role > 1 ;
 		},
 		getUser: function() {
 			return _user;
@@ -63,13 +67,25 @@ app.config(['$routeProvider',function($routeProvider) {
     }).when('/cadastro/unidade',{
     	templateUrl: 'unidade/formularioUnidade.html',
     	controller: 'FormularioUnidadeController',
-    	access_level: 2
+    	access_level: 8
     }).when('/cadastro/usuario',{
     	templateUrl: 'usuario/formularioUsuario.html',
     	controller: 'FormularioUsuarioController',
     	access_level: 3
+    }).when('/login',{
+    	templateUrl: 'login.html',
+    	controller: 'FormLoginController',
+    	access_level: 1
+    }).when('/autenticado/inicio',{
+    	templateUrl: 'autenticado/inicio.html',
+    	controller: 'InicioController',
+    	access_level: 2
+    }).when('/autenticado/administrativo/cadastro/cliente',{
+    	templateUrl: 'autenticado/administrativo/cliente/formCliente.html',
+    	controller: 'CadastroClienteController',
+    	access_level: 2
     }).otherwise({
-    	redirectTo: '/teste'
+    	redirectTo: '/autenticado/inicio'
     })
 }]);
 
@@ -86,9 +102,52 @@ app.factory('UnidadeService',['Restangular',function(Restangular) {
 			},function(err) {
 				window.alert('deu erro');
 			});
+		},
+		getUnidadesDisponiveis : function(promise) {
+			this.objRest.getList().then(promise,function(err) {
+				window.alert("deu erro");
+			});
+		},
+		getPlanosDisponiveis: function(unidade, callback) {
+			Restangular.one('unidades',unidade.id).getList('planos').then(callback,function(err) {
+				window.alert("erro");
+			});
 		}
 	}
 }]);
+
+app.factory('ClienteService',['Restangular',function(Restangular) {
+	return {
+		objRest: Restangular.all('clientes'),
+		post: function(cliente,callback) {
+			this.objRest.post(cliente).then(callback,function(err) {
+				
+			}); 
+		}
+	}
+}]);
+
+app.factory('LoginService',['Restangular','Auth','$location',function(Restangular,Auth,$location) {
+	return {
+		objRest: Restangular.all('authentication'),
+		post: function(user)  {
+			this.objRest.post(user).then(function(resp) {
+				Auth.setUser({roles : resp.roles, email : resp.userEmail, token: resp.token});
+				$location.path('/autenticado/inicio');
+			},function(err) {
+				window.alert('deu erro');
+			});
+		}
+	}
+}]);
+
+app.factory("PlanoService",['Restangular',function(Restangular) {
+	return {
+		objRest: Restangular.all('planos'),
+		
+	}
+}]);
+
 
          
 //
@@ -115,8 +174,38 @@ app.factory('UnidadeService',['Restangular',function(Restangular) {
 //	}
 //});
 
-app.controller('FormularioUnidadeController',function($scope,UnidadeService) {
-	$scope.submeterFormulario = function() {
-		UnidadeService.post($scope.unidade);
+app.controller('FormLoginController',function($scope,LoginService) {
+	$scope.submitForm = function() {
+		LoginService.post($scope.user);
 	}
 });
+
+app.controller('InicioController',function($scope,$route,$location) {
+	$scope.irParaAdministracao = function() {
+		$location.path('/autenticado/administrativo/cadastro/cliente');
+	}
+});
+
+app.controller('CadastroClienteController',function($scope,$route,$location,UnidadeService,ClienteService) {
+	UnidadeService.getUnidadesDisponiveis(function (resp) {
+		$scope.unidades = resp;
+	});
+	
+	$scope.atualizarPlanos = function() {
+		UnidadeService.getPlanosDisponiveis($scope.cliente.unidade,function(resp) {
+			$scope.planos = resp;
+		})
+	};
+	
+	$scope.cadastrarCliente = function() {
+		ClienteService.post($scope.cliente,function(resp) {
+			window.alert("foi bonito foooi");
+		});
+	}
+});
+
+//app.controller('FormularioUnidadeController',function($scope,UnidadeService) {
+//	$scope.submeterFormulario = function() {
+//		UnidadeService.post($scope.unidade);
+//	}
+//});

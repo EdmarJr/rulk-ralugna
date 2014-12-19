@@ -1,0 +1,24 @@
+<form novalidate>
+	<label for="nome">Nome</label>
+	<input id="nome" type="text" ng-model="cliente.nome" ng-minlength="5" placeholder="Digite seu nome" required >
+	<label for="email">Email</label>
+	<input id="email" type="email" ng-model="cliente.email" placeholder="Digite seu email" required>
+	<label for="rg">RG</label>
+	<input id="rg" type="text" ng-model="cliente.rg" placeholder="Digite seu rg">
+	<label for="orgaoExpedidor">Orgao Expedidor</label>
+	<input id="orgaoExpedidor" type="text" ng-model="cliente.orgaoExpedidor" placeholder="Digite o orgão expedidor de seu rg">
+	<label>CPF</label>
+	<input type="text" required ng-model="cliente.cpf" placeholder="Digite seu cpf">
+	<label>Sexo</label>
+	<input id="masc" type="radio" checked="checked" ng-model="cliente.sexo" value="MASCULINO">
+	<label for="masc">Masculino</label>
+	<input id="femi" type="radio" ng-model="cliente.sexo" value="FEMININO">
+	<label for="femi">Feminino</label>
+	<label for="dataNascimento">Data de Nascimento</label>
+	<input id="dataNascimento" type="date" ng-model="cliente.dataNascimento" placeholder="Digite sua data de nascimento">
+	<label for="unidade">Unidade</label>
+	<select id="unidade" ng-change="atualizarPlanos()" ng-model="cliente.unidade" ng-options="unidade.nome for unidade in unidades"/>
+	<label for="plano">Plano</label>
+	<select id="plano" ng-model="cliente.plano" ng-options="plano.nome for plano in planos"></select>
+	<button ng-click="cadastrarCliente()">Salvar</button>
+</form>
