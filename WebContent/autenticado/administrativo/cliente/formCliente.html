@@ -20,5 +20,12 @@
 	<select id="unidade" ng-change="atualizarPlanos()" ng-model="cliente.unidade" ng-options="unidade.nome for unidade in unidades"/>
 	<label for="plano">Plano</label>
 	<select id="plano" ng-model="cliente.plano" ng-options="plano.nome for plano in planos"></select>
+	<label for="tipoPagamento">Período pagamento</label>
+	<select id="tipoPagamento" ng-model="cliente.tipoPagamento">
+		<option>Mensal</option>
+		<option>Trimestral</option>
+		<option>Semestral</option>
+		<option>Anual</option>
+	</select>
 	<button ng-click="cadastrarCliente()">Salvar</button>
 </form>
