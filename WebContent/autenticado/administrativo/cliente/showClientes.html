@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
+<div style="width:100%; height:200px;">
+<body ng-controller="ConsultaClienteController">
+    <div class="table-container">
+      <table st-table="rowCollection" st-pagination-scroll  st-pipe="callServer" class="table table-striped">
+    <thead>
+    <tr>
+        <th st-sort="firstName">first name</th>
+        <th st-sort="lastName">last name</th>
+        <th st-sort="birthDate">birth date</th> 
+        <th st-sort="balance">balance</th>
+        <th>email</th>
+    </tr>
+    <tr>
+        <th>
+            <input st-search="firstName" placeholder="search for firstname" class="input-sm form-control" type="search"/>
+        </th>
+        <th colspan="4">
+            <input st-search placeholder="global search" class="input-sm form-control" type="search"/>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="row in rowCollection">
+        <td>{{row.firstName | uppercase}}</td>
+        <td>{{row.lastName}}</td>
+        <td>{{row.birthDate | date}}</td>
+        <td>{{row.balance | currency}}</td>
+        <td><a ng-href="mailto:{{row.email}}">email</a></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<div ng-show="isLoading" class="loading-indicator"></div>
 </body>
-</html>
+</div>
