@@ -132,19 +132,17 @@ app.factory('ClienteService',['Restangular',function(Restangular) {
 	}
 }]);
 
-app.factory('LoginService',['Restangular','Auth','$location',function(Restangular,Auth,$location) {
+app.factory('LoginService',function($http,Restangular,Auth,$location) {
 	return {
-		objRest: Restangular.all('authentication'),
-		post: function(user)  {
-			this.objRest.post(user).then(function(resp) {
-				Auth.setUser({roles : resp.roles, email : resp.userEmail, token: resp.token});
-				$location.path('/autenticado/inicio');
-			},function(err) {
-				window.alert('deu erro');
-			});
+		logar: function(user)  {
+			 $http.post('/Rest-web/j_security_check', user).success(function(data, status, headers, config) {
+			    	window.alert('logou');
+			  }).error(function(data, status, headers, config) {
+				    window.alert('deu erro');
+			  });
 		}
 	}
-}]);
+});
 
 app.factory("PlanoService",['Restangular',function(Restangular) {
 	return {
@@ -156,7 +154,7 @@ app.factory("PlanoService",['Restangular',function(Restangular) {
 
 app.controller('FormLoginController',function($scope,LoginService) {
 	$scope.submitForm = function() {
-		LoginService.post($scope.user);
+		LoginService.logar($scope.user);
 	}
 });
 
