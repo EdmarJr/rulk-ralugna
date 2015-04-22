@@ -1,0 +1,32 @@
+.ng-invalid.ng-touched {
+	@extend .alert-danger; 
+}
+
+.ng-valid.ng-touched { 
+	@extend .alert-info; 
+}
+
+input[type=date] { 
+	@extend .form-control;  
+}
+
+input[type=email] {
+	@extend .form-control;  
+}
+
+input[type=text] {
+	@extend .form-control;  
+}
+
+select { 
+	@extend .form-control;  
+}
+
+button {  
+    @extend .btn;
+    @extend .btn-default;
+}  
+
+form {
+
+}

@@ -1,5 +1,3 @@
 {
-	"directory":"resource/components",
-	"proxy":"http://PROXY@mir-proxy.miranteinfo.com:3128/",
-	"https-proxy":"http://PROXY@mir-proxy.miranteinfo.com:3128/"
+	"directory":"resource/components"
 }
