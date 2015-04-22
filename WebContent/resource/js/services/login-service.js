@@ -1,20 +1,17 @@
 var app = angular.module('rulk-login-service', ['rulk-restangular-config','rulk-auth']);
 
-app.factory('LoginService', function($http, Restangular, Auth, $location) {
-	function redirecionar(endereco) {
-		$location.path(endereco);
-	}
-
+app.factory('LoginService', function($http, Restangular, Auth, $location,$q) {
 	return {
 		logar : function(user) {
-			$http.post('/Rest-web/login', {
+			return $http.post('/Rest-web/login', {
 				email : user.email,
 				senha : user.senha
-			}).success(function(data, status, headers, config) {
-				redirecionar('/autenticado/inicio');
-			}).error(function(data, status, headers, config) {
-				window.alert('deu erro');
 			});
+//				.success(function(data, status, headers, config) {
+//				redirecionar('/autenticado/inicio');
+//			}).error(function(data, status, headers, config) {
+//				window.alert('deu erro');
+//			});
 		}
 	}
 });

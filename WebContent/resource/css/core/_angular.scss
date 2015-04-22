@@ -1,6 +1,6 @@
 .ng-invalid.ng-touched {
 	@extend .alert-danger; 
-}
+} 
 
 .ng-valid.ng-touched { 
 	@extend .alert-info; 
@@ -11,6 +11,10 @@ input[type=date] {
 }
 
 input[type=email] {
+	@extend .form-control;  
+}
+
+input[type=password] { 
 	@extend .form-control;  
 }
 

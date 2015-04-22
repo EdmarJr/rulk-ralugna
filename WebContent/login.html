@@ -1,4 +1,5 @@
 <form novalidate class="container-fluid">
+<div ng-hide="messageError == undefined" class="alert alert-danger" role="alert">{{messageError}}</div> 
 <label>Email</label>
 <input type="email" ng-model="user.email" placeholder="Digite seu email">
 <label>Senha</label>
