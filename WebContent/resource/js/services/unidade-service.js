@@ -22,6 +22,9 @@ app.factory('UnidadeService', [
 							.then(callback, function(err) {
 								window.alert("erro");
 							});
+				},
+				incluirUnidade: function(unidade) {
+					return this.objRest.post(unidade);
 				}
 			}
 		} ]);

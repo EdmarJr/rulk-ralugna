@@ -25,7 +25,7 @@ app.config([ '$routeProvider', function($routeProvider) {
 		access_level : 1
 	}).when('/cadastro/unidade', {
 		templateUrl : 'unidade/formularioUnidade.html',
-		controller : 'FormularioUnidadeController',
+		controller : 'UnidadeController',
 		access_level : 8
 	}).when('/cadastro/usuario', {
 		templateUrl : 'usuario/formularioUsuario.html',
