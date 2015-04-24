@@ -6,7 +6,7 @@ app.run(function($rootScope, $location, Auth) {
 			if (err) {
 				evt.preventDefault();
 				$rootScope.$evalAsync(function() {
-					$location.path('/login');
+					/*$location.path('/login');*/
 				});
 			} else {
 //				evt.preventDefault();
@@ -46,6 +46,10 @@ app.config([ '$routeProvider', function($routeProvider) {
 	}).when('/autenticado/administrativo/consulta/clientes', {
 		templateUrl : 'autenticado/administrativo/cliente/showClientes.html',
 		controller : 'ConsultaClienteController',
+		access_level : 2
+	}).when('/unidades', {
+		templateUrl : 'unidade/unidades.html',
+		controller : 'UnidadesController',
 		access_level : 2
 	}).otherwise({
 		redirectTo : '/autenticado/inicio'

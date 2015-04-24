@@ -1,0 +1,17 @@
+<table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
+    <tr ng-repeat="user in $data"
+        ng-click="user.$selected = !user.$selected; changeSelection(user)"
+        ng-class="{'active': user.$selected}">
+        <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+            {{user.name}}
+        </td>
+        <td data-title="'Age'" sortable="'age'" filter="{ 'age': 'text' }">
+            {{user.age}}
+        </td>
+        <td> 
+            <button class="btn-info">Gerenciar</button> 
+            <button class="btn-danger">Excluir</button>
+        </td>
+        
+    </tr>
+</table>
