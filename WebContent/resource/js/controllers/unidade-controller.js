@@ -1,4 +1,4 @@
-var app = angular.module('rulk-unidade-controller', ['rulk-unidade-service']);
+var app = angular.module('rulk-unidade-controller', ['rulk-unidade-service','ngTable']);
 
 app.controller('UnidadeController', function($scope, $location,
 		UnidadeService) {

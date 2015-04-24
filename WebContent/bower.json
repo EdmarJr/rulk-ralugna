@@ -27,6 +27,7 @@
     "restangular": "~1.4.0",
     "angular-smart-table": "~1.4.5",
     "lrInfiniteScroll": "~1.0.0",
-    "bootstrap-sass": "~3.3.4"
+    "bootstrap-sass": "~3.3.4",
+    "ng-table": "~0.5.4"
   }
 }
