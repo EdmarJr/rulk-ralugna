@@ -13,9 +13,7 @@ app.factory('UnidadeService', [
 					});
 				},
 				getUnidadesDisponiveis : function(promise) {
-					this.objRest.getList().then(promise, function(err) {
-						window.alert("deu erro");
-					});
+					return this.objRest.getList();
 				},
 				getPlanosDisponiveis : function(unidade, callback) {
 					Restangular.one('unidades', unidade.id).getList('planos')

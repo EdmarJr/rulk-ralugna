@@ -2,8 +2,10 @@ var app = angular.module('rulk-cadastro-cliente-controller', ['rulk-unidade-serv
 
 app.controller('CadastroClienteController', function($scope, $location,
 		UnidadeService, ClienteService) {
-	UnidadeService.getUnidadesDisponiveis(function(resp) {
+	UnidadeService.getUnidadesDisponiveis().then(function(resp) {
 		$scope.unidades = resp;
+	},function(err) {
+		window.alert(err);
 	});
 
 	$scope.atualizarPlanos = function() {

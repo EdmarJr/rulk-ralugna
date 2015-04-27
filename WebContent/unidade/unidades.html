@@ -20,11 +20,12 @@
     <tr ng-repeat="user in $data"
         ng-click="user.$selected = !user.$selected; changeSelection(user)"
         ng-class="{'active': user.$selected}">
-        <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
-            {{user.name}}
+        {{user}}
+        <td data-title="'Nome Unidade'" sortable="'name'" filter="{ 'name': 'text' }">
+            {{user.nome}}
         </td>
-        <td data-title="'Age'" sortable="'age'" filter="{ 'age': 'text' }">
-            {{user.age}}
+        <td data-title="'Responsável'" sortable="'age'" filter="{ 'age': 'text' }">
+            {{user.responsavel.nome}}
         </td>
         <td> 
             <button class="btn-info">Gerenciar</button> 
