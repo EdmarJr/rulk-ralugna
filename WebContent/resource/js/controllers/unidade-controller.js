@@ -18,9 +18,9 @@ app.directive('inclusaoEdicaoUnidade', function() {
 	restrict:'A',
     templateUrl: 'unidade/inclusaoEdicaoUnidade.html',
     scope: {
-    	idUnidade:'@'
+    	unidade:'@',
     },
-    controller: function($scope) {
+    controller: function($scope,UnidadeService) {
     }
   };
 });
@@ -86,9 +86,16 @@ app.controller('UnidadesController', function($scope, $location,$filter,ngTableP
 	        }
 	        
 	        $scope.acionarInclusao = function() {
-	        	$scope.telaInclusao = true;
-	        	$scope.idUnidade = 3;
 	        	$('#myModal').modal('show');
+	        }
+	        
+	        $scope.acionarAlteracao = function(idUnidade) {
+	        		UnidadeService.obterPorIdUnidade(idUnidade).then(function(retorno) {
+	        			$scope.unidade = retorno;
+	        			$scope.acionarInclusao();
+	        		},function(erro){
+	        			window.alert(erro);
+	        		});
 	        }
 });
 

@@ -4,6 +4,6 @@
 	<div ng-hide="messageSuccess == undefined" class="alert alert-success" role="alert">{{messageSuccess}}</div> 
 	<label for="nome">Nome</label>
 	<input id="nome" type="text" ng-model="unidade.nome" placeholder="Digite o nome da unidade.">
-	<button ng-click="submeterFormulario()">Enviar</button>
-	{{idUnidade}}
+	<button ng-click="submeterFormulario()">Salvar</button>
+	{{unidade.nome}}
 </form> 
