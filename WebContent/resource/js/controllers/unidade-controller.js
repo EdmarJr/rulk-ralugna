@@ -12,6 +12,19 @@ app.controller('UnidadeController', function($scope, $location,
 		}
 });
 
+
+app.directive('inclusaoEdicaoUnidade', function() {
+  return {
+	restrict:'A',
+    templateUrl: 'unidade/inclusaoEdicaoUnidade.html',
+    scope: {
+    	idUnidade:'@'
+    },
+    controller: function($scope) {
+    }
+  };
+});
+
 app.controller('UnidadesController', function($scope, $location,$filter,ngTableParams) {
 	var data = [
 	            {name: "Moroni", age: 50},
@@ -61,6 +74,12 @@ app.controller('UnidadesController', function($scope, $location,$filter,ngTableP
 
 	        $scope.changeSelection = function(user) {
 	            // console.info(user);
+	        }
+	        
+	        $scope.acionarInclusao = function() {
+	        	$scope.telaInclusao = true;
+	        	$scope.idUnidade = 3;
+	        	$('#myModal').modal('show');
 	        }
 });
 

@@ -1,0 +1,9 @@
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<form class="container-fluid" novalidate>
+	<div ng-hide="messageError == undefined" class="alert alert-danger" role="alert">{{messageError}}</div> 
+	<div ng-hide="messageSuccess == undefined" class="alert alert-success" role="alert">{{messageSuccess}}</div> 
+	<label for="nome">Nome</label>
+	<input id="nome" type="text" ng-model="unidade.nome" placeholder="Digite o nome da unidade.">
+	<button ng-click="submeterFormulario()">Enviar</button>
+	{{idUnidade}}
+</form> 

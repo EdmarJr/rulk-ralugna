@@ -1,3 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Unidade - Formulário</h4> 
+      </div>
+      <div class="modal-body">
+		<div inclusao-edicao-unidade id-unidade="{{idUnidade}}" ng-show="telaInclusao == true"/> 
+      </div>
+<!--       <div class="modal-footer"> -->
+<!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+<!--       </div> -->
+    </div>
+  </div>
+</div>
 <table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
     <tr ng-repeat="user in $data"
         ng-click="user.$selected = !user.$selected; changeSelection(user)"
@@ -15,3 +33,4 @@
         
     </tr>
 </table>
+<button ng-click="acionarInclusao()">Incluir Unidade</button> 

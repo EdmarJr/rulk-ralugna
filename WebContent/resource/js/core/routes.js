@@ -6,7 +6,7 @@ app.run(function($rootScope, $location, Auth) {
 			if (err) {
 				evt.preventDefault();
 				$rootScope.$evalAsync(function() {
-					/*$location.path('/login');*/
+					$location.path('/login');
 				});
 			} else {
 //				evt.preventDefault();
