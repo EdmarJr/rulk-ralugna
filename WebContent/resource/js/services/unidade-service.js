@@ -21,7 +21,7 @@ app.factory('UnidadeService', [
 								window.alert("erro");
 							});
 				},
-				incluirUnidade: function(unidade) {
+				salvarUnidade: function(unidade) {
 					return this.objRest.post(unidade);
 				},
 				obterPorIdUnidade: function(idUnidade) {

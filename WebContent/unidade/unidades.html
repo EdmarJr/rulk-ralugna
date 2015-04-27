@@ -7,7 +7,7 @@
         <h4 class="modal-title" id="myModalLabel">Unidade - Formulário</h4> 
       </div>
       <div class="modal-body">
-		<div inclusao-edicao-unidade unidade="{{unidade}}" /> 
+		<div inclusao-edicao-unidade /> 
       </div>
 <!--       <div class="modal-footer"> -->
 <!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
@@ -16,6 +16,7 @@
     </div>
   </div>
 </div>
+<div ng-hide="mensagemSucesso == undefined" class="alert alert-success" role="alert">{{mensagemSucesso}}</div> 
 <table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
     <tr ng-repeat="user in $data"
         ng-click="user.$selected = !user.$selected; changeSelection(user)"
