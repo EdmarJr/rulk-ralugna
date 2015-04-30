@@ -23,6 +23,7 @@ app.directive('inclusaoEdicaoUnidade', function() {
     		UnidadeService.salvarUnidade($scope.unidade).then(function(response){
     			adicionarMensagemSuccesso($scope.$parent,"Unidade foi salva com sucesso.");
     			$('#myModal').modal('hide');
+    			$scope.adicionarUnidadeNaTabela(response);
     		},function(err){
     			window.alert("deu erro");
     		});
@@ -32,16 +33,15 @@ app.directive('inclusaoEdicaoUnidade', function() {
 });
 
 app.controller('UnidadesController', function($scope, $location,$filter,ngTableParams,UnidadeService) {
-	var data = [];
 
 	UnidadeService.getUnidadesDisponiveis().then(function(resp) {
-		$scope.data = resp;
-		criarTabelaUnidades($scope.data);
+		$scope.unidades = resp;
+		criarTabelaUnidades();
 	},function(err) {
 		window.alert(err);
 	});
 
-	function criarTabelaUnidades(data) {
+	function criarTabelaUnidades() {
         $scope.tableParams = new ngTableParams({
             page: 1,            // show first page
             count: 10,          // count per page
@@ -52,20 +52,25 @@ app.controller('UnidadesController', function($scope, $location,$filter,ngTableP
                 //name: 'asc'     // initial sorting
             }
         }, {
-            total: data.length, // length of data
+            total: $scope.unidades.length, // length of data
             getData: function ($defer, params) {
                 // use build-in angular filter
                 var filteredData = params.filter() ?
-                        $filter('filter')(data, params.filter()) :
-                        data;
+                        $filter('filter')($scope.unidades, params.filter()) :
+                        	$scope.unidades;
                 var orderedData = params.sorting() ?
                         $filter('orderBy')(filteredData, params.orderBy()) :
-                        data;
+                        	$scope.unidades;
 
                 params.total(orderedData.length); // set total for recalc pagination
                 $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
+	}
+	
+	$scope.adicionarUnidadeNaTabela = function(unidade) {
+		$scope.unidades.push(unidade);
+		$scope.tableParams.reload();
 	}
 
     $scope.changeSelection = function(user) {
@@ -78,7 +83,7 @@ app.controller('UnidadesController', function($scope, $location,$filter,ngTableP
     
     $scope.acionarAlteracao = function(idUnidade) {
 		UnidadeService.obterPorIdUnidade(idUnidade).then(function(retorno) {
-			$scope.unidade = retorno;
+			$scope.unidade = retorno[0];
 			$scope.acionarInclusao();
 		},function(erro){
 			window.alert(erro);

@@ -9,7 +9,6 @@ app.factory('Auth', [
 				getUsuarioLogado : function(callback) {
 					Restangular.one("usuarios/logado").get().then(
 							function(retorno) {
-								console.log(retorno);
 								callback(retorno);
 							}, function(err) {
 								console.log(err);
